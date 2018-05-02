@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BeerService } from '../../Services/beer.service';
+import { BreweryService } from '../../Services/brewery.service';
 
 @Component({
   selector: 'app-beers',
@@ -9,11 +10,23 @@ import { BeerService } from '../../Services/beer.service';
 export class BeersComponent implements OnInit {
 
   randomBeers;
-  constructor(private beerService: BeerService) {
+  breweryBeers;
+  constructor(private beerService: BeerService,private breweryService: BreweryService) {
     this.initializeRandomBeers();
+//this.getBreweryBeers()
    }
 
   ngOnInit() {
+  }
+
+  initializeRandomBeers()
+  {
+    if (localStorage.getItem("randomBeers") === null) {
+      this.getRandomBeers();
+    }else{
+      this.randomBeers = JSON.parse(localStorage.getItem('randomBeers'));
+      console.log(this.randomBeers);
+    }
   }
 
   getRandomBeers() {
@@ -28,13 +41,17 @@ export class BeersComponent implements OnInit {
 
   }
 
-  initializeRandomBeers()
-  {
-    if (localStorage.getItem("randomBeers") === null) {
-      this.getRandomBeers();
-    }else{
-      this.randomBeers = localStorage.getItem('randomBeers');
-    }
+  getBreweryBeers() {
+    let id = "6hzBLo"
+    this.breweryService.getBreweryBeers(id).then(response=>{
+    this.breweryBeers = response;
+      //this.messages = response;
+    }, (err) => {
+      console.log(err);
+    });
+
   }
+
+
 
 }

@@ -9,8 +9,19 @@ export class BreweryService {
   protected apiUrl;
 
   constructor(private http: HttpClient) {
-    this.apiUrl = environment.apiUrl + 'beers';
+    this.apiUrl = environment.apiUrl + 'brewery/';
    }
+
+   getBreweryBeers(beerId) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl + 'beers/'+beerId)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 
 
 
