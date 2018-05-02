@@ -5,8 +5,8 @@ import { BreweryService } from './Services/brewery.service';
 import {HttpClientModule} from '@angular/common/http';
 
 
-import { AppComponent } from './app.component';
-import { BeersComponent } from './beers/beers.component';
+import { AppComponent } from './components/app/app.component';
+import { BeersComponent } from './components/beers/beers.component';
 
 
 @NgModule({

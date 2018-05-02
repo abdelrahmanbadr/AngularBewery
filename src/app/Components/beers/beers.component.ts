@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BeerService } from '../Services/beer.service';
+import { BeerService } from '../../Services/beer.service';
 
 @Component({
   selector: 'app-beers',
@@ -27,6 +27,7 @@ export class BeersComponent implements OnInit {
     });
 
   }
+
   initializeRandomBeers()
   {
     if (localStorage.getItem("randomBeers") === null) {
@@ -34,7 +35,6 @@ export class BeersComponent implements OnInit {
     }else{
       this.randomBeers = localStorage.getItem('randomBeers');
     }
-
   }
 
 }
