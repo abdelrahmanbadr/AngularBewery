@@ -9,7 +9,7 @@ import { BreweryService } from '../../Services/brewery.service';
 })
 export class BeersComponent implements OnInit {
 
-  randomBeers;
+  randomBeer;
   breweryBeers;
   constructor(private beerService: BeerService,private breweryService: BreweryService) {
     this.initializeRandomBeers();
@@ -24,15 +24,15 @@ export class BeersComponent implements OnInit {
     if (localStorage.getItem("randomBeers") === null) {
       this.getRandomBeers();
     }else{
-      this.randomBeers = JSON.parse(localStorage.getItem('randomBeers'));
-      console.log(this.randomBeers);
+      this.randomBeer = JSON.parse(localStorage.getItem('randomBeers'));
+      console.log(this.randomBeer);
     }
   }
 
   getRandomBeers() {
     this.beerService.getRandomBeers().then(response=>{
 
-      this.randomBeers = response;
+      this.randomBeer = response;
       localStorage.setItem('randomBeers',JSON.stringify(response));
       //this.messages = response;
     }, (err) => {
