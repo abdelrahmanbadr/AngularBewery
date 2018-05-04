@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BeerService } from './Services/beer.service';
 import { BreweryService } from './Services/brewery.service';
+import { SearchService } from './Services/search.service';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -23,7 +24,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [BreweryService,BeerService],
+  providers: [BreweryService,BeerService,SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
