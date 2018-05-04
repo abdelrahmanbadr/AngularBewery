@@ -8,20 +8,53 @@
     <div class="panel panel-success">
       <div class="panel-heading">Random Beer</div>
       <div class="panel-body">
-        <div class="col-md-3">
-          <!-- {{randomBeer.labels.medium}} -->
-          <img [attr.src]="randomBeer.labels.icon" >
-
+        <div class="col-md-3 col-sm-3">
+          <img [attr.src]="randomBeer.labels.medium" height="150">
         </div>
-        <div class="col-md-6"> {{randomBeer.description}}</div>
-        <div class="col-md-3">
-          <button class="btn btn-primary">Another Beer </button> <br><br>
-          <button class="btn btn-primary">More From This Brewery </button>
+        <div class="col-md-6 col-sm-6"> {{randomBeer.description}}</div>
+        <div class="col-md-3 col-sm-3">
+          <button class="btn btn-primary btn-lg" (click)="getRandomBeer()">Another Beer </button> <br><br>
+          <button class="btn btn-primary btn-lg" (click)="getBreweryBeers(randomBeer.id)">More From This Brewery </button>
         </div>
-
-
       </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <h2>Search </h2>
+            <!-- <img  src="noImage.png" height="100" > -->
+           </div>
+        <div class="row">
+          <div class="col-md-3 col-sm-3" >
+
+          </div>
+          <div class="col-md-6 col-sm-6" >
+
+          </div>
+          <div class="col-md-3 col-sm-3">
+              <button class="btn btn-primary btn-lg col-md-9">Search </button>
+          </div>
+        </div>
+        <div class="row">
+         <h2>Search Results</h2>
+        </div>
+
+        <div class="row"   *ngFor="let beer of breweryBeers">
+            <div class="col-md-2 col-sm-2" >
+              <br> <br>
+                <img *ngIf="beer.labels" [attr.src]="beer.labels.icon" height="100" >
+                <!-- <img else src="noImage.png" height="100" > -->
+              </div>
+              <div class="col-md-10 col-sm-10" >
+                <div>
+                  <h3  *ngIf="beer.name">{{beer.name}}</h3>
+                </div>
+                <div *ngIf="beer.description">
+                  {{beer.description}}
+                </div>
+              </div>
+
+        </div>
+      </div>
 
 
 

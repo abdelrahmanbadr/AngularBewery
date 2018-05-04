@@ -10,7 +10,7 @@ export class BeerService {
     this.apiUrl = environment.apiUrl + 'beers/';
    }
 
-  getRandomBeers() {
+   getRandomBeer() {
     return new Promise((resolve, reject) => {
       this.http.get(this.apiUrl + 'random')
         .subscribe(res => {
