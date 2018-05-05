@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators,NgForm } from '@angular/forms';
 import { BreweryService } from '../../Services/brewery.service';
 import { SearchService } from '../../Services/search.service';
 import { EmitterService } from '../../Services/emitter-service.service';
@@ -11,12 +12,12 @@ import { EmitterService } from '../../Services/emitter-service.service';
 export class BreweryBeersComponent implements OnInit {
   randomBeer;
   beers;
-  searchQuery;
-  searchType ;
-  searchError ;
+  searchError: string ;
+  searchTypeError: boolean;
+  @ViewChild('form') searchForm:NgForm;
+
 
   constructor(private breweryService: BreweryService,private searchService:SearchService,private emitterService: EmitterService) {
-
   }
 
   ngOnInit() {
@@ -54,7 +55,7 @@ export class BreweryBeersComponent implements OnInit {
 
   search() {
     this.beers = [];
-    this.searchService.search(this.searchQuery,this.searchType).then(response=>{
+    this.searchService.search(this.searchForm.value.searchQuery,this.searchForm.value.searchType).then(response=>{
       if(response['empty']){
         this.searchError = response['empty'];
       }else{
@@ -68,6 +69,8 @@ export class BreweryBeersComponent implements OnInit {
       }
     });
   }
+
+
 
 
 }

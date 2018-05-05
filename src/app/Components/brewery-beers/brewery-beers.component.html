@@ -4,20 +4,27 @@
       <!-- <img  src="noImage.png" height="100" > -->
      </div>
   <div class="row">
-    <div class="col-md-3 col-sm-3" >
-      <input class="form-control" placeholder="search" [(ngModel)]="searchQuery">
-    </div>
-    <div class="col-md-6 col-sm-6" >
-      <div class="col-md-6 col-sm-6" style="border-style: groove; width:auto">
-          <input type="radio" value="beer" name="searchType" [(ngModel)]="searchType"> Beer
-          <input type="radio" value="brewery" name="searchType" [(ngModel)]="searchType"> Brewery
+    <form #form= "ngForm" (ngSubmit)="search()" >
+      <div class="col-md-3 col-sm-3" >
+        <input class="form-control" placeholder="search" name="searchQuery" ngModel required #searchQuery="ngModel" pattern="[a-zA-Z0-9\- ]*">
+        <span class="help-block" *ngIf="!searchQuery.valid && searchQuery.touched">please enter only letters, numbers, hyphens and spaces</span>
       </div>
+      <div class="col-md-6 col-sm-6" >
+          <!-- <div *ngIf="searchTypeError" style="color:red">Please Choose Type:</div> -->
+
+        <div class="col-md-6 col-sm-6" style="border-style: groove; width:auto">
+            <input type="radio" value="beer" name="searchType" ngModel required > Beer
+            <input type="radio" value="brewery" name="searchType" ngModel required> Brewery
+        </div>
 
 
-    </div>
-    <div class="col-md-3 col-sm-3">
-        <button class="btn btn-primary btn-lg col-md-9" (click)="search()">Search </button>
-    </div>
+      </div>
+      <div class="col-md-3 col-sm-3">
+          <input [disabled]="!form.valid" type="submit" value="search" class="btn btn-primary btn-lg col-md-9" >
+
+          <!-- <button class="btn btn-primary btn-lg col-md-9" (click)="search()">Search </button> -->
+      </div>
+    </form>
   </div>
   <div class="row">
    <h2>Search Results</h2>
@@ -30,7 +37,7 @@
       <div class="col-md-2 col-sm-2" >
         <br> <br>
           <img *ngIf="beer.labels" [attr.src]="beer.labels.icon" height="100" >
-          <!-- <img else src="noImage.png" height="100" > -->
+          <img *ngIf="!beer.labels" src="../../../assets/noImage.png"  height="100"/>
         </div>
         <div class="col-md-10 col-sm-10" >
           <div>
