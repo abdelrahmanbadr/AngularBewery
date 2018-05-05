@@ -12,9 +12,9 @@ export class BreweryService {
     this.apiUrl = environment.apiUrl + 'brewery/';
    }
 
-   getBreweryBeers(beerId) {
+  getBreweriesBeers(breweriesIds) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.apiUrl + 'beers/'+beerId)
+      this.http.get(this.apiUrl+breweriesIds+'/beers')
         .subscribe(res => {
           resolve(res);
         }, (err) => {

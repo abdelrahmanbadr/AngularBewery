@@ -8,7 +8,7 @@ export class SearchService {
   protected apiUrl;
 
   constructor(private http: HttpClient) {
-    this.apiUrl = environment.apiUrl + 'search/';
+    this.apiUrl = environment.apiUrl + 'brewerydbSearch/';
   }
   search(query,type) {
     return new Promise((resolve, reject) => {

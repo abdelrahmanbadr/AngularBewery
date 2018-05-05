@@ -1,0 +1,13 @@
+<div class="panel panel-success">
+  <div class="panel-heading">Random Beer</div>
+  <div class="panel-body">
+    <div class="col-md-3 col-sm-3">
+      <img [attr.src]="randomBeer.labels.medium" height="150">
+    </div>
+    <div class="col-md-6 col-sm-6"> {{randomBeer.description}}</div>
+    <div class="col-md-3 col-sm-3">
+      <button class="btn btn-primary btn-lg" (click)="getRandomBeer()">Another Beer </button> <br><br>
+      <button class="btn btn-primary btn-lg" (click)="showBreweryBeers(randomBeer.id)">More From This Brewery </button>
+    </div>
+  </div>
+</div>
