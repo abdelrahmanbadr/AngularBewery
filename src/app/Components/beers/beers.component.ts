@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BeerService } from '../../Services/beer.service';
 import { BreweryService } from '../../Services/brewery.service';
+import { SearchService } from '../../Services/search.service';
 
 @Component({
   selector: 'app-beers',
@@ -10,9 +11,11 @@ import { BreweryService } from '../../Services/brewery.service';
 export class BeersComponent implements OnInit {
 
   randomBeer;
-  breweryBeers;
   beers;
-  constructor(private beerService: BeerService,private breweryService: BreweryService) {
+  searchQuery;
+  searchType ;
+  searchError ;
+  constructor(private beerService: BeerService,private breweryService: BreweryService,private searchService:SearchService) {
     this.initializerandomBeer();
 //this.getBreweryBeers()
    }
@@ -46,21 +49,34 @@ export class BeersComponent implements OnInit {
   getBreweryBeers(id) {
     if (localStorage.getItem("breweryBeers"+id) === null) {
       this.breweryService.getBreweryBeers(id).then(response=>{
-        this.breweryBeers = response;
+        this.beers = response;
         localStorage.setItem('breweryBeers'+id,JSON.stringify(response));
         //this.messages = response;
       }, (err) => {
         console.log(err);
       });
     }else{
-      this.breweryBeers = JSON.parse(localStorage.getItem("breweryBeers"+id));
+      this.beers = JSON.parse(localStorage.getItem("breweryBeers"+id));
     }
-
   }
+
   removeBreweryBeersStorage() {
     if (this.randomBeer !== null && localStorage.getItem("breweryBeers"+this.randomBeer.id) !== null) {
       localStorage.removeItem('breweryBeers'+this.randomBeer.id);
     }
+  }
+
+  search() {
+    this.beers = [];
+    this.searchService.search(this.searchQuery,this.searchType).then(response=>{
+      if(response['error']){
+        this.searchError = response['error'];
+      }else{
+        this.beers = response;
+      }
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 

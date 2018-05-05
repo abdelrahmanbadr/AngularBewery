@@ -5,6 +5,7 @@ import { BreweryService } from './Services/brewery.service';
 import { SearchService } from './Services/search.service';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './components/app/app.component';
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [BreweryService,BeerService,SearchService],
