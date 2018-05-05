@@ -49,7 +49,7 @@ export class RandomBeerComponent implements OnInit {
   }
 
   removeBreweriesBeersStorage() {
-    if (this.randomBeer !== null && localStorage.getItem("breweriesBeers"+this.randomBeer.id) !== null) {
+    if (this.randomBeer != null && localStorage.getItem("breweriesBeers"+this.randomBeer.id) != null) {
       localStorage.removeItem('breweriesBeers'+this.randomBeer.id);
     }
   }

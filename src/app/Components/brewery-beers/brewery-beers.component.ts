@@ -16,20 +16,18 @@ export class BreweryBeersComponent implements OnInit {
   searchError ;
 
   constructor(private breweryService: BreweryService,private searchService:SearchService,private emitterService: EmitterService) {
-    if (localStorage.getItem("randomBeer") !== null) {
-      this.randomBeer = JSON.parse(localStorage.getItem('randomBeer'));
-    }
+
   }
 
   ngOnInit() {
     this.emitterService.events$.forEach(event =>
       this.getBreweriesBeers(event)
     );
-
   }
 
   pluckBreweryIds()
   {
+    this.randomBeer = JSON.parse(localStorage.getItem('randomBeer'));
     var breweriesIds = [];
     if(this.randomBeer.breweries !=null){
       this.randomBeer.breweries.forEach(element => {
